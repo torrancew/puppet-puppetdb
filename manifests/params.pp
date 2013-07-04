@@ -58,6 +58,11 @@ class puppetdb::params {
   $ssl_host = $::fqdn
   $ssl_port = 8081
 
+  # repl.ini
+  $use_repl  = false
+  $repl_type = 'nrepl'
+  $repl_port = 8082
+
   ## Service Parameters
   $service = 'puppetdb'
 }
