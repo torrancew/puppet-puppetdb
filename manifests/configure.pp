@@ -24,6 +24,11 @@
 # unless otherwise noted.
 #
 class puppetdb::configure(
+  $threads              = $puppetdb::params::threads,
+  $var_dir              = $puppetdb::params::var_dir,
+  $temp_usage           = $puppetdb::params::temp_usage,
+  $store_usage          = $puppetdb::params::store_usage,
+  $resource_query_limit = $puppetdb::params::resource_query_limit,
   $use_postgres         = $puppetdb::params::use_postgres,
   $database             = $puppetdb::params::database,
   $db_host              = $puppetdb::params::db_host,
@@ -32,11 +37,10 @@ class puppetdb::configure(
   $db_password          = $puppetdb::params::db_password,
   $gc_interval          = $puppetdb::params::gc_interval,
   $slow_query_limit     = $puppetdb::params::slow_query_limit,
-  $threads              = $puppetdb::params::threads,
-  $var_dir              = $puppetdb::params::var_dir,
-  $temp_usage           = $puppetdb::params::temp_usage,
-  $store_usage          = $puppetdb::params::store_usage,
-  $resource_query_limit = $puppetdb::params::resource_query_limit,
+  $host                 = $puppetdb::params::host,
+  $port                 = $puppetdb::params::port,
+  $ssl_host             = $puppetdb::params::ssl_host,
+  $ssl_port             = $puppetdb::params::ssl_port,
 ) inherits puppetdb::params {
   Class['puppetdb::install'] -> Class['puppetdb::configure']
 
@@ -82,6 +86,7 @@ class puppetdb::configure(
       owner   => 'puppetdb',
       group   => 'puppetdb',
       mode    => 0640,
+      content => template('puppetdb/jetty.ini.erb'),
       require => File['/etc/puppetdb/conf.d'];
 
     '/etc/puppetdb/conf.d/repl.ini':

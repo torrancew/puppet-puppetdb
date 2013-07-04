@@ -25,11 +25,13 @@
 # unless otherwise noted.
 #
 class puppetdb::params {
-  # Installation Parameters
+  ## Installation Parameters
   $package = 'puppetdb'
   $version = 'installed'
 
-  # Configuration Parameters
+  ## Configuration Parameters
+
+  # config.ini
   $var_dir     = '/var/lib/puppetdb'
   $temp_usage  = 51200
   $store_usage = 102400
@@ -40,6 +42,7 @@ class puppetdb::params {
   }
   $resource_query_limit = 20000
 
+  # database.ini
   $use_postgres     = false
   $database         = 'puppetdb'
   $db_host          = 'localhost'
@@ -49,7 +52,13 @@ class puppetdb::params {
   $gc_interval      = 60
   $slow_query_limit = 10
 
-  # Service Parameters
+  # jetty.ini
+  $host     = 'localhost'
+  $port     = 8080
+  $ssl_host = $::fqdn
+  $ssl_port = 8081
+
+  ## Service Parameters
   $service = 'puppetdb'
 }
 
