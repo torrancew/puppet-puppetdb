@@ -8,7 +8,7 @@ password    = <%= @db_password %>
 <% else -%>
 classname   = org.hsqldb.jdbcDriver
 subprotocol = hsqldb
-subname     = <%= "file:#{@var_dir}/db/#{@database}.hsqldb;hsqldb.tx=mvcc;sql.syntax_pgs=true" %>
+subname     = <%= "file:#{@var_dir}/db/#{@database};hsqldb.tx=mvcc;sql.syntax_pgs=true" %>
 <% end -%>
 
 gc-interval         = <%= @gc_interval %>
