@@ -1,0 +1,16 @@
+[database]
+<% if @use_postgres == true -%>
+classname   = org.postgresql.Driver
+subprotocol = postgresql
+subname     = <%= "//#{@db_host}:#{@db_port}/#{@database}" %>
+username    = <%= @db_user %>
+password    = <%= @db_password %>
+<% else -%>
+classname   = org.hsqldb.jdbcDriver
+subprotocol = hsqldb
+subname     = <%= "file:#{@var_dir}/db/#{@database}.hsqldb;hsqldb.tx=mvcc;sql.syntax_pgs=true" %>
+<% end -%>
+
+gc-interval         = <%= @gc_interval %>
+log-slow-statements = <%= @slow_query_limit %>
+

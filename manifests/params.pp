@@ -38,8 +38,16 @@ class puppetdb::params {
     false => $::processorcount,
     true  => inline_template('<%= @processorcount / 2 %>'),
   }
-
   $resource_query_limit = 20000
+
+  $use_postgres     = false
+  $database         = 'puppetdb'
+  $db_host          = 'localhost'
+  $db_port          = 5432
+  $db_user          = 'puppetdb'
+  $db_password      = 'puppetdb'
+  $gc_interval      = 60
+  $slow_query_limit = 10
 
   # Service Parameters
   $service = 'puppetdb'
