@@ -26,7 +26,7 @@
 class puppetdb::service(
   $service = $puppetdb::params::service,
 ) inherits puppetdb::params {
-  Class['puppetdb::configure'] -> Class['puppetdb::service']
+  Class['puppetdb::configure'] ~> Class['puppetdb::service']
 
   validate_string( $service )
   service {
