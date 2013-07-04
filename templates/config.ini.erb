@@ -1,0 +1,10 @@
+[global]
+vardir               = <%= @var_dir %>
+logging-config       = /etc/puppetdb/log4j.properties
+resource-query-limit = <%= @resource_query_limit %>
+
+[command-processing]
+threads     = <%= @threads %>
+store-usage = <%= @store_usage %>
+temp-usage  = <%= @temp_usage %>
+

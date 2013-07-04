@@ -23,7 +23,13 @@
 # Copyright 2013, Tray Torrance
 # unless otherwise noted.
 #
-class puppetdb::configure {
+class puppetdb::configure(
+  $threads = $puppetdb::params::threads,
+  $var_dir = $puppetdb::params::var_dir,
+  $temp_usage  = $puppetdb::params::temp_usage,
+  $store_usage = $puppetdb::params::store_usage,
+  $resource_query_limit = $puppetdb::params::resource_query_limit,
+) inherits puppetdb::params {
   Class['puppetdb::install'] -> Class['puppetdb::configure']
 
   file {
@@ -52,6 +58,7 @@ class puppetdb::configure {
       owner   => 'puppetdb',
       group   => 'puppetdb',
       mode    => 0640,
+      content => template('puppetdb/config.ini.erb'),
       require => File['/etc/puppetdb/conf.d'];
 
     '/etc/puppetdb/conf.d/database.ini':

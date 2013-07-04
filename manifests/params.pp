@@ -25,8 +25,22 @@
 # unless otherwise noted.
 #
 class puppetdb::params {
+  # Installation Parameters
   $package = 'puppetdb'
-  $service = 'puppetdb'
   $version = 'installed'
+
+  # Configuration Parameters
+  $var_dir     = '/var/lib/puppetdb'
+  $temp_usage  = 51200
+  $store_usage = 102400
+  $threads     = $::processorcount > 1 ? {
+    false => $::processorcount,
+    true  => inline_template('<%= @processorcount / 2 %>'),
+  }
+
+  $resource_query_limit = 20000
+
+  # Service Parameters
+  $service = 'puppetdb'
 }
 
