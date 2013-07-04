@@ -33,7 +33,8 @@ class puppetdb::params {
   $var_dir     = '/var/lib/puppetdb'
   $temp_usage  = 51200
   $store_usage = 102400
-  $threads     = ($::processorcount != '1') ? {
+  $multi_cpu   = ($::processorcount != '1')
+  $threads     = $multi_cpu ? {
     false => $::processorcount,
     true  => inline_template('<%= @processorcount / 2 %>'),
   }
