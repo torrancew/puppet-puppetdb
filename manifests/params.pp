@@ -53,10 +53,14 @@ class puppetdb::params {
   $slow_query_limit = 10
 
   # jetty.ini
-  $host     = 'localhost'
-  $port     = 8080
-  $ssl_host = $::fqdn
-  $ssl_port = 8081
+  $host                = 'localhost'
+  $port                = 8080
+  $ssl_host            = $::fqdn
+  $ssl_port            = 8081
+  $keystore            = '/etc/puppetdb/ssl/keystore.jks'
+  $truststore          = '/etc/puppetdb/ssl/truststore.jks'
+  $keystore_password   = 'puppetdb'
+  $truststore_password = 'puppetdb'
 
   # repl.ini
   $use_repl  = false

@@ -42,10 +42,14 @@ class puppetdb::configure(
   $slow_query_limit = $puppetdb::params::slow_query_limit,
 
   # jetty.ini
-  $host     = $puppetdb::params::host,
-  $port     = $puppetdb::params::port,
-  $ssl_host = $puppetdb::params::ssl_host,
-  $ssl_port = $puppetdb::params::ssl_port,
+  $host                = $puppetdb::params::host,
+  $port                = $puppetdb::params::port,
+  $ssl_host            = $puppetdb::params::ssl_host,
+  $ssl_port            = $puppetdb::params::ssl_port,
+  $keystore            = $puppetdb::params::keystore,
+  $truststore          = $puppetdb::params::truststore,
+  $keystore_password   = $puppetdb::params::keystore_password,
+  $truststore_password = $puppetdb::params::truststore_password,
 
   # repl.ini
   $use_repl  = $puppetdb::params::use_repl,
@@ -73,6 +77,13 @@ class puppetdb::configure(
       owner   => 'puppetdb',
       group   => 'puppetdb',
       mode    => 0750,
+      require => File['/etc/puppetdb'];
+
+    '/etc/puppetdb/ssl':
+      ensure  => directory,
+      owner   => 'puppetdb',
+      group   => 'puppetdb',
+      mode    => 0700,
       require => File['/etc/puppetdb'];
 
     '/etc/puppetdb/conf.d/config.ini':
